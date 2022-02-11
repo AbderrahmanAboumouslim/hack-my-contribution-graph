@@ -5,5 +5,6 @@ const columns = Array.from(
 const emptyColor = "#161b22";
 const fillColor = "#39d353";
 
-// columns[1][0].style.fill = fillColor;
-columns.forEach((c) => c.forEach((f) => (f.style.fill = fillColor)));
+columns.forEach((c) => c.forEach((rect) => (rect.style.fill = fillColor)));
+
+console.log(fillColor);
