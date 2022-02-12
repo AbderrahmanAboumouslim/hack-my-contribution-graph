@@ -1,4 +1,6 @@
+// npx webpack --watch ./src --mode development
 import Color from "color";
+import interpolateRGB from "interpolate-rgb";
 
 const columns = Array.from(
   document.querySelectorAll(".js-calendar-graph > svg > g > g")
@@ -7,7 +9,15 @@ const columns = Array.from(
 const emptyColor = "#161b22";
 const fillColor = "#39d353";
 
-columns.forEach((c) => c.forEach((rect) => (rect.style.fill = fillColor)));
+const interpolator = interpolateRGB(
+  Color(emptyColor).color,
+  Color(fillColor).color
+);
 
-console.log("test");
-console.log(Color(fillColor));
+// x squares are 53  and y squares are 7
+// to get a nice gradient we add x + y then divide it by 60
+columns.forEach((c, x) =>
+  c.forEach(
+    (rect, y) => (rect.style.fill = Color(interpolator((x + y) / 60)).hex())
+  )
+);
